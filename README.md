@@ -38,6 +38,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 ## Credits
 
 https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.match()<br>
+https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.maxlength()<br>
 
 
 ## License
