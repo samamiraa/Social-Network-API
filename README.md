@@ -39,6 +39,8 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.match()<br>
 https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.maxlength()<br>
+https://mongoosejs.com/docs/tutorials/getters-setters.html<br>
+https://stackoverflow.com/questions/70724966/how-to-use-getter-or-setter-with-mongoose-timestamps<br>
 
 
 ## License
