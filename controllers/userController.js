@@ -43,9 +43,31 @@ module.exports = {
     async deleteUser(req, res) {
         try {
             const deleteUser = await User.findOneAndDelete({ _id: req.params.userId });
+            if (!deleteUser) {
+                return res.status(404).json({ message: 'No users exist!'});
+            }
             res.status(200).json(deleteUser);
         } catch (error) {
             console.error('Error deleting user: ', error);
+            res.status(500).json(error);
+        }
+    },
+
+    async updateUser(req, res) {
+        try {
+            const updateUser = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { username: req.body.username, email: req.body.email },
+                { new: true }
+                );
+
+            if (!updateUser) {
+                return res.status(404).json({ message: 'No users exist!'});
+            }
+            
+            res.status(200).json(updateUser);
+        } catch (error) {
+            console.error('Error updating user: ', error);
             res.status(500).json(error);
         }
     },
