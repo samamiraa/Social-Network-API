@@ -90,5 +90,23 @@ module.exports = {
             console.error('Error adding friend: ', error);
             res.status(500).json(error);
         }
+    },
+
+    async deleteFriend(req, res) {
+        try {
+            const deleteFriend = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: req.params.friendId } }, { new: true }
+            );
+
+            if (!deleteFriend) {
+                return res.status(404).json({ message: 'No users exist!'});
+            };
+
+            res.status(200).json(deleteFriend);
+        } catch (error) {
+            console.error('Error deleting friend: ', error);
+            res.status(500).json(error);
+        }
     }
 };

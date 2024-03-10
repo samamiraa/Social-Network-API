@@ -41,6 +41,7 @@ https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.match()
 https://mongoosejs.com/docs/api/schemastring.html#SchemaString.prototype.maxlength()<br>
 https://mongoosejs.com/docs/tutorials/getters-setters.html<br>
 https://stackoverflow.com/questions/70724966/how-to-use-getter-or-setter-with-mongoose-timestamps<br>
+https://stackoverflow.com/questions/18395412/mongodb-opposite-of-addtoset<br>
 
 
 ## License
