@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const { User, Thought } = require('../models');
 
 module.exports = {
     async getUsers(req, res) {
@@ -17,7 +17,9 @@ module.exports = {
     async getOneUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.userId })
-            .select('-__v');
+            .select('-__v')
+            .populate('thoughts')
+            .populate('friends');
 
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID' });
@@ -64,11 +66,29 @@ module.exports = {
             if (!updateUser) {
                 return res.status(404).json({ message: 'No users exist!'});
             }
-            
+
             res.status(200).json(updateUser);
         } catch (error) {
             console.error('Error updating user: ', error);
             res.status(500).json(error);
         }
     },
+
+    async addFriend(req, res) {
+        try {
+            const newFriend = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $addToSet: { friends: req.params.friendId } }, { new: true }
+            );
+
+            if (!newFriend) {
+                return res.status(404).json({ message: 'No users exist!'});
+            };
+
+            res.status(200).json(newFriend);
+        } catch (error) {
+            console.error('Error adding friend: ', error);
+            res.status(500).json(error);
+        }
+    }
 };
