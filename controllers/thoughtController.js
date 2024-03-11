@@ -87,8 +87,24 @@ module.exports = {
             console.error('Error deleting thought: ', error);
             res.status(500).json(error);
         }
-    } 
-    
+    },
 
+    async addReaction(req, res) {
+        try {
+            const addReaction = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: req.body } }, { new: true }
+            )
+
+            if (!addReaction) {
+                return res.status(404).json({ message: 'No users exist!'});
+            };
+
+            res.status(200).json(addReaction);
+        } catch (error) {
+            console.error('Error adding reaction: ', error);
+            res.status(500).json(error);
+        }
+    }
     
 }
