@@ -48,6 +48,8 @@ module.exports = {
             if (!deleteUser) {
                 return res.status(404).json({ message: 'No users exist!'});
             }
+
+            await Thought.deleteMany({ _id: { $in: deleteUser.thoughts } });
             res.status(200).json(deleteUser);
         } catch (error) {
             console.error('Error deleting user: ', error);
