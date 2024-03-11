@@ -74,5 +74,21 @@ module.exports = {
             console.error('Error updating thought: ', error);
             res.status(500).json(error);
         }
-    }
+    },
+
+    async deleteThought(req, res) {
+        try {
+            const deleteThought = await Thought.findOneAndDelete({ _id: req.params.thoughtId })
+            if (!deleteThought) {
+                return res.status(404).json({ message: 'No thought exists!'});
+            }
+            res.status(200).json(deleteThought);   
+        } catch (error) {
+            console.error('Error deleting thought: ', error);
+            res.status(500).json(error);
+        }
+    } 
+    
+
+    
 }
