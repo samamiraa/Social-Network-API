@@ -1,9 +1,9 @@
-const { Schema, model, SchemaTypes } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const formatDate = require('../utils/formatDate');
 
 const reactionSchema = new Schema(
     {
-        reactionId: Schema.Types.ObjectId,
+        reactionId: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
         reactionBody: { type: String, required: true, maxLength: 280 },
         username: { type: String, required: true },
         createdAt: { type: Date, default: Date.now, get: currentDate => formatDate(currentDate) },
@@ -14,6 +14,7 @@ const reactionSchema = new Schema(
             getters: true,
         },
         id: false,
+        _id: false
     }
 )
 

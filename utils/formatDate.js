@@ -8,6 +8,6 @@ module.exports = {
 
         const dateWithoutTime = date.toISOString().replace(/T[\d:]+\.\d+Z/, '');
 
-        return dayjs(dateWithoutTime).format('MMM ddd, YYYY');
+        return dayjs(dateWithoutTime).format('MMM D, YYYY');
     },
 }
