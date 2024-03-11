@@ -105,6 +105,24 @@ module.exports = {
             console.error('Error adding reaction: ', error);
             res.status(500).json(error);
         }
+    },
+
+    async deleteReaction(req, res) {
+        try {
+            const deleteReaction = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $pull: { reactions: {reactionId: req.params.reactionId }} }, { new: true }
+            );
+
+            if (!deleteReaction) {
+                return res.status(404).json({ message: 'No reactions exist!'});
+            };
+
+            res.status(200).json(deleteReaction);
+        } catch (error) {
+            console.error('Error deleting reaction: ', error);
+            res.status(500).json(error);
+        }
     }
     
 }
