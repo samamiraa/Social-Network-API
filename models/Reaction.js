@@ -1,6 +1,8 @@
-const { Schema, model, Types } = require('mongoose');
+// imports for mongoose & dayjs
+const { Schema, Types } = require('mongoose');
 const { formatDate } = require('../utils/formatDate');
 
+// data types for reactions, schema only
 const reactionSchema = new Schema(
     {
         reactionId: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },

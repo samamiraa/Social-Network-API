@@ -1,6 +1,8 @@
+// imports models
 const { User, Thought } = require('../models');
 
 module.exports = {
+    //gets all users
     async getUsers(req, res) {
         try {
             const users = await User.find();
@@ -14,6 +16,7 @@ module.exports = {
         }
     },
 
+    //gets one user by id, populates friend & thought info
     async getOneUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.userId })
@@ -32,6 +35,7 @@ module.exports = {
         }
     },
 
+    // creates user
     async createUser(req, res) {
         try {
             const newUser = await User.create(req.body);
@@ -42,6 +46,7 @@ module.exports = {
         }
     },
 
+    //deletes user
     async deleteUser(req, res) {
         try {
             const deleteUser = await User.findOneAndDelete({ _id: req.params.userId });
@@ -49,6 +54,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No users exist!'});
             }
 
+            //deletes associated thoughts
             await Thought.deleteMany({ _id: { $in: deleteUser.thoughts } });
             res.status(200).json(deleteUser);
         } catch (error) {
@@ -57,6 +63,7 @@ module.exports = {
         }
     },
 
+    //updates user
     async updateUser(req, res) {
         try {
             const updateUser = await User.findOneAndUpdate(
@@ -76,6 +83,7 @@ module.exports = {
         }
     },
 
+    //add friend to user
     async addFriend(req, res) {
         try {
             const newFriend = await User.findOneAndUpdate(
@@ -94,6 +102,7 @@ module.exports = {
         }
     },
 
+    //deletes friend
     async deleteFriend(req, res) {
         try {
             const deleteFriend = await User.findOneAndUpdate(

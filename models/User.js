@@ -1,5 +1,7 @@
+// imports mongoose
 const { Schema, model } = require('mongoose');
 
+// user data types 
 const userSchema = new Schema(
     {
         username: { type: String, unique: true, required: true, trim: true },
@@ -27,12 +29,14 @@ const userSchema = new Schema(
     }
 );
 
+// creates  friendscount virtual
 userSchema
     .virtual('friendCount')
     .get(function () {
         return this.friends.length;
     });
 
+// initiates user model
 const User = model('User', userSchema);
 
 module.exports = User;
